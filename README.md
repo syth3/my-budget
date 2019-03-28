@@ -1,5 +1,5 @@
 # custom-budget
-I got fed up with the budgeting software out there and decided to make my own. Here is what I would like to do with this project:
+I got fed up with the budgeting software out there and decided to make my own. So, with the help of my trusty Raspberry Pi, here is what I would like to do with this project:
 
 1. Enable the Pi to send and receive SMS
 2. Enable the Pi to receive SMS regarding the Date, Withdrawl/Deposit, Category, and Description of a transaction

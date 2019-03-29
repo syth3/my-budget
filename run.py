@@ -10,29 +10,17 @@ app = Flask(__name__)
 def sms_reply():
     """Respond to incoming messages with a friendly SMS."""
     
-    # Start our response
-    resp = MessagingResponse()
-
-    # Add a message
-    resp.message("I got your message!")
-    
-    inbound_message = request.form.get("Body")
-    print(type(request))
-    for key in request.form:
-        print(key)
-    print("AFTER LOOP")
-    #print(request.form.keys)
-
-    return str(resp)
-    """
     number = request.form['From']
     message_body = request.form['Body']
-
-    resp = twiml.Response()
-    resp.message("I got your message!")
-    print(request.form)
-    #resp.message('Hello {}, you said: {}'.format(number, message_body))
-    return str(resp)"""
+    
+    # Start our response
+    resp = MessagingResponse()
+    #resp.message("I got your message!")
+    for key in request.form:
+        print(key + ": " + request.form[key])
+    print("REQUEST:", request)
+    resp.message("Hello {}, you said: \n\n{}".format(number, message_body))
+    return str(resp)
 
 if __name__ == "__main__":
     app.run(debug=True)

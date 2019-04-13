@@ -8,14 +8,8 @@ from google.auth.transport.requests import Request
 # If modifying these scopes, delete the file token.pickle.
 SCOPES = ['https://www.googleapis.com/auth/spreadsheets']
 
-# The ID and range of a sample spreadsheet.
-# SAMPLE_SPREADSHEET_ID = '1Hw0eKH6tgp9bDD7RBJqTRc7aks2xFajbnhW8bVd5OGw'
-# SAMPLE_RANGE_NAME = 'Sheet1!A1:D5'
 
-def main():
-    """Shows basic usage of the Sheets API.
-    Prints values from a sample spreadsheet.
-    """
+def get_service():
     creds = None
     # The file token.pickle stores the user's access and refresh tokens, and is
     # created automatically when the authorization flow completes for the first
@@ -35,22 +29,35 @@ def main():
         with open('token.pickle', 'wb') as token:
             pickle.dump(creds, token)
     service = build('sheets', 'v4', credentials=creds)
-    print(type(service))
-    # Call the Sheets API
-    request = service.spreadsheets().create()
-    response = request.execute()
-    print(repsonse)
-    # result = sheet.values().get(spreadsheetId=SAMPLE_SPREADSHEET_ID,
-    #                            range=SAMPLE_RANGE_NAME).execute()
-    '''values = result.get('values', [])
+    return service
 
-    if not values:
-        print('No data found.')
-    else:
-        print('Name, Major:')
-        for row in values:
-            # Print columns A and E, which correspond to indices 0 and 4.
-            print('%s, %s' % (row[0], row[4]))'''
+
+def get_spreadsheet(service, spreadsheet_id, ranges):
+    request = service.spreadsheets().get(spreadsheetId=spreadsheet_id, ranges=ranges)
+    return request.execute()
+
+
+def get_cell(service, spreadsheet_id, range_):
+    request = service.spreadsheets().values().get(spreadsheetId=spreadsheet_id, range=range_)
+    value = request.execute()
+    return value
+
+
+def send_cell(service, spreadsheet_id, range_, body_):
+    service.spreadsheets().values().update(spreadsheetId=spreadsheet_id, range=range_, body=body_, valueInputOption='USER_ENTERED').execute()
+
+def main():
+    """Shows basic usage of the Sheets API.
+    Prints values from a sample spreadsheet.
+    """
+    service = get_service()
+    spreadsheet_id = "14WKX_tnQboiw9-plw2W2euThCyfEdZTNU76m-146R6Q"
+    # Call the Sheets API
+    spreadsheet = get_spreadsheet(service, spreadsheet_id, [])
+    # print(spreadsheet)
+    body = {'values': [[25, 26, 27]]}
+    send_cell(service, spreadsheet_id, 'Sheet1!A3:C3', body)
+    print(get_cell(service, spreadsheet_id, 'Sheet1!A1:C4'))
 
 if __name__ == '__main__':
     main()

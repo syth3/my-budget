@@ -1,4 +1,4 @@
-# custom-budget
+# my-budget
 I got fed up with the budgeting software out there and decided to make my own. So, with the help of my trusty Raspberry Pi, here is what I would like to do with this project:
 
 ## Basic Process

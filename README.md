@@ -16,3 +16,4 @@ I got fed up with the budgeting software out there and decided to make my own. S
 * Return net (all income - all expenses) for a given range
 * format chart tab
 * Compute Net Worth
+* Use api to get bank balance information

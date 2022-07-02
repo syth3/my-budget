@@ -1,6 +1,11 @@
 # my-budget
 I got fed up with the budgeting software out there and decided to make my own. So, with the help of my trusty Raspberry Pi, here is what I would like to do with this project:
 
+## MVP
+1. For every run, download the current version of the spreadsheet, check it into version control, and push it
+2. Send text messages 1 day before bills or credit card posting and payments are due
+3. 
+
 ## Basic Process
 1. Enable the Pi to send and receive SMS
 2. Enable the Pi to receive SMS regarding the Date, Withdrawl/Deposit, Category, and Description of a transaction
